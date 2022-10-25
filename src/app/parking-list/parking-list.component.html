@@ -20,7 +20,8 @@
       <thead class="bg-teal-100 border-b-2 border-gray-300">
         <tr>
           <th class="w-12 p-3 text-sm font-semibold tracking-wide text-left">Id</th>
-          <th class="w-74 p-3 flex text-sm font-semibold tracking-wide text-left">
+          <th class="w-74 p-3 flex text-sm font-semibold tracking-wide text-left"
+          (click)="sortTheList()">
             <svg *ngIf="sorting; else sort" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
               stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
               <path stroke-linecap="round" stroke-linejoin="round"
