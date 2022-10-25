@@ -1,0 +1,45 @@
+<div class="p-5 h-screen bg-gray-100">
+  <div class="w-100 mb-2 flex flex-row align-middle justify-between flex-wrap">
+    <h1 class="text-xl mb-2">Parking list</h1>
+    <button (click)="creationMode=!creationMode"
+      class="bg-teal-600 hover:bg-teal-700 text-white py-1.5 px-1.5 rounded text-sm">
+    {{!creationMode ? 'Add meter' : 'Hide form'}}
+    </button>
+  </div>
+
+  <app-add-meter *ngIf="creationMode"></app-add-meter>
+
+  <div class="overflow-auto rounded-lg shadow">
+    <table class="w-full">
+
+      <thead class="bg-teal-100 border-b-2 border-gray-300">
+        <tr>
+          <th class="w-12 p-3 text-sm font-semibold tracking-wide text-left">Id</th>
+          <th class="w-74 p-3 text-sm font-semibold tracking-wide text-left">Address</th>
+          <th class="w-12 p-3 text-sm font-semibold tracking-wide text-left">Status</th>
+        </tr>
+      </thead>
+
+      <tbody class="divide-y divide-gray-100">
+        <tr
+        *ngFor="let item of metersInfo; let i = index"
+        [routerLink]="['/',item.id]"
+        class="bg-teal-100"
+        [ngClass]="{'bg-gray-200': i%2 === 0}"
+        >
+          <td class="p-3 text-sm text-black-900 whitespace-nowrap">{{item.id}}</td>
+          <td class="p-3 text-sm text-balck-900 whitespace-nowrap">{{item.address}}</td>
+          <td class="p-3 text-sm text-black-900 whitespace-nowrap">
+            <span
+              class="p-1.5 text-xs font-medium uppercase tracking-wider bg-green-200 rounded-lg bg-opacity-100 border-black"
+              [ngClass]="{'bg-red-500': item.status === 'Disabled'}">
+              {{item.status}}
+            </span>
+          </td>
+        </tr>
+      </tbody>
+
+    </table>
+  </div>
+</div>
+

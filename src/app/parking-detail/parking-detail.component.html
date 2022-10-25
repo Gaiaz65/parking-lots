@@ -1,0 +1,39 @@
+<div class="overflow-hidden bg-white shadow sm:rounded-lg">
+  <div class="px-4 py-5 sm:px-6 flex ">
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+      class="w-6 h-6 hover:fill-neutral-600 hover:animate-bounce transition duration-1000" routerLink="/list">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
+    </svg>
+
+
+    <h3 class="text-lg font-medium leading-6 text-gray-900">Parking meter : {{singleMeter.id}}</h3>
+  </div>
+  <div class="border-t border-gray-200">
+    <dl>
+
+      <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+        <dt class="text-sm font-medium text-gray-500">Location address</dt>
+        <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">{{singleMeter.address}}</dd>
+      </div>
+
+      <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+        <dt class="text-sm font-medium text-gray-500">The number of usages</dt>
+        <dd class="mt-1 text-sm flex justify-between  text-gray-900 sm:col-span-2 sm:mt-0">{{singleMeter.usages}}
+          <button
+            class="bg-gray-500 hover:bg-gray-700 text-white py-1.5 px-1.5 rounded text-sm disabled:opacity-30"
+            (click)="useTheMeter()" [disabled]="isDisabled">Use</button>
+        </dd>
+      </div>
+
+      <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+        <dt class="text-sm font-medium text-gray-500">Status</dt>
+        <dd class="mt-1 text-sm flex justify-between text-gray-900 sm:col-span-2 sm:mt-0">{{singleMeter.status}}
+          <button class="bg-gray-500 hover:bg-gray-700 text-white py-1.5 px-1.5 rounded text-sm"
+            (click)="toggleStatus()">{{singleMeter.status
+            ==='Disabled' ? 'Enable' : 'Disable'}}</button>
+        </dd>
+      </div>
+
+    </dl>
+  </div>
+</div>
