@@ -7,7 +7,7 @@ import { DataService } from './../services/data-service.service';
   selector: 'app-add-meter',
   templateUrl: './add-meter.component.html',
 })
-export class AddMeterComponent implements OnInit {
+export class AddMeterComponent {
   form = new FormGroup({
     address: new FormControl(),
     status: new FormControl(),
@@ -20,6 +20,4 @@ export class AddMeterComponent implements OnInit {
   }
 
   constructor(private dService:DataService) {}
-
-  ngOnInit(): void {}
 }

@@ -21,7 +21,7 @@ export class ParkingDetailComponent implements OnInit {
     private dService: DataService,
   ) {}
 
-  ngOnInit(): void {
+  ngOnInit() {
     this.id = this.route.snapshot.paramMap.get('id');
     let singleMeter = this.dService.metersInfo.find(
       (meter) => meter.id === Number(this.id)
