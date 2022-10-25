@@ -30,7 +30,7 @@ export class ParkingDetailComponent implements OnInit {
       this.singleMeter = singleMeter;
       return;
     }
-    if (this.singleMeter === undefined) this.router.navigate(['/list']);
+    this.router.navigate(['/list']);
   }
 
   useTheMeter() {

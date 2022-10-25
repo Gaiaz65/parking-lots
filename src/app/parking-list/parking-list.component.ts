@@ -8,6 +8,7 @@ import { Meter } from '../models/data.model';
   templateUrl: './parking-list.component.html',
 })
 export class ParkingListComponent implements OnInit {
+  sorting:boolean | undefined = true
   creationMode = false;
   metersInfo: Meter[] = [];
 
@@ -16,11 +17,21 @@ export class ParkingListComponent implements OnInit {
   ngOnInit(): void {
     this.dService.initialInfoSub.subscribe(
       (metersInfo) => {
-        this.metersInfo = metersInfo;
+        this.metersInfo = metersInfo.sort((a, b) => (a.address > b.address ? 1 : -1))
       },
-      (err) => {
-        console.log(err);
+      () => {
+        alert('Something went wrong, try again later!')
       }
     );
+  }
+  sortTheList(){
+    if(this.sorting) {
+      this.metersInfo.sort((a, b) => (a.address > b.address ? -1 : 1))
+      this.sorting = undefined
+    } else {
+      this.metersInfo.sort((a, b) => (a.address > b.address ? 1 : -1));
+      this.sorting = true;
+    }
+
   }
 }

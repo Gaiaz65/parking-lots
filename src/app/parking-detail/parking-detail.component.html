@@ -1,7 +1,7 @@
-<div class="overflow-hidden bg-white shadow sm:rounded-lg">
+<div *ngIf="singleMeter" class="overflow-hidden bg-white shadow sm:rounded-lg">
   <div class="px-4 py-5 sm:px-6 flex ">
     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
-      class="w-6 h-6 hover:fill-neutral-600 hover:animate-bounce transition duration-1000" routerLink="/list">
+      class="w-6 h-6 hover:animate-bounce transition duration-1000 focus:border-none" routerLink="/list">
       <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
     </svg>
 

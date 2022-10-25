@@ -1,32 +1,40 @@
-<div class="p-5 h-screen bg-gray-100">
+<div class="p-5 bg-gray-100">
   <div class="w-100 mb-2 flex flex-row align-middle justify-between flex-wrap">
     <h1 class="text-xl mb-2">Parking list</h1>
+    <button
+    (click)="sortTheList()"
+    class="bg-teal-600 hover:bg-teal-700 text-white py-1.5 px-1.5 rounded text-sm md:hidden">
+      Sort the list
+    </button>
     <button (click)="creationMode=!creationMode"
       class="bg-teal-600 hover:bg-teal-700 text-white py-1.5 px-1.5 rounded text-sm">
-    {{!creationMode ? 'Add meter' : 'Hide form'}}
+      {{!creationMode ? 'Add meter' : 'Hide form'}}
     </button>
   </div>
 
   <app-add-meter *ngIf="creationMode"></app-add-meter>
 
-  <div class="overflow-auto rounded-lg shadow">
+  <div class="overflow-auto rounded-lg shadow hidden md:block">
     <table class="w-full">
 
       <thead class="bg-teal-100 border-b-2 border-gray-300">
         <tr>
           <th class="w-12 p-3 text-sm font-semibold tracking-wide text-left">Id</th>
-          <th class="w-74 p-3 text-sm font-semibold tracking-wide text-left">Address</th>
+          <th class="w-74 p-3 flex text-sm font-semibold tracking-wide text-left">
+            <svg *ngIf="sorting; else sort" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+              stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+              <path stroke-linecap="round" stroke-linejoin="round"
+                d="M3 4.5h14.25M3 9h9.75M3 13.5h9.75m4.5-4.5v12m0 0l-3.75-3.75M17.25 21L21 17.25" />
+            </svg>
+            Address
+          </th>
           <th class="w-12 p-3 text-sm font-semibold tracking-wide text-left">Status</th>
         </tr>
       </thead>
 
       <tbody class="divide-y divide-gray-100">
-        <tr
-        *ngFor="let item of metersInfo; let i = index"
-        [routerLink]="['/',item.id]"
-        class="bg-teal-100"
-        [ngClass]="{'bg-gray-200': i%2 === 0}"
-        >
+        <tr *ngFor="let item of metersInfo; let i = index" [routerLink]="['/',item.id]" class="bg-teal-100"
+          [ngClass]="{'bg-gray-200': i%2 === 0}">
           <td class="p-3 text-sm text-black-900 whitespace-nowrap">{{item.id}}</td>
           <td class="p-3 text-sm text-balck-900 whitespace-nowrap">{{item.address}}</td>
           <td class="p-3 text-sm text-black-900 whitespace-nowrap">
@@ -38,8 +46,30 @@
           </td>
         </tr>
       </tbody>
-
     </table>
   </div>
 </div>
 
+<div class="bg-gray-100 px-10 sm:p-5 md:hidden">
+  <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 ">
+    <div
+    *ngFor="let item of metersInfo; let i = index" [routerLink]="['/',item.id]"
+    class="bg-white p-4 space-y-4 rounded-lg shadow">
+      <div class="flex items-center space-x-2 text-sm sm:flex sm:justify-between">
+        <div class="font-bold">{{item.id}}</div>
+        <div
+          class="p-1.5 text-xs font-medium uppercase tracking-wider bg-green-200 rounded-lg bg-opacity-100 border-black"
+          [ngClass]="{'bg-red-500': item.status === 'Disabled'}">{{item.status}}</div>
+      </div>
+      <div class="text-sm text-gray-700">{{item.address}}</div>
+    </div>
+  </div>
+</div>
+
+<ng-template #sort>
+  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+    class="w-6 h-6">
+    <path stroke-linecap="round" stroke-linejoin="round"
+      d="M3 4.5h14.25M3 9h9.75M3 13.5h5.25m5.25-.75L17.25 9m0 0L21 12.75M17.25 9v12" />
+  </svg>
+</ng-template>
