@@ -6,6 +6,11 @@ import { ParkingListComponent } from './parking-list/parking-list.component';
 
 const routes: Routes = [
   {
+    path: '',
+    redirectTo:'list',
+    pathMatch:'full'
+  },
+  {
     path: 'list',
     component: ParkingListComponent,
   },
