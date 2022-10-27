@@ -2,7 +2,7 @@
   <div class="w-100 mb-2 flex flex-row align-middle justify-between flex-wrap">
     <h1 class="text-xl mb-2">Parking list</h1>
     <button
-    (click)="sortTheList()"
+    (click)=" onClickSort()"
     class="bg-teal-600 hover:bg-teal-700 text-white py-1.5 px-1.5 rounded text-sm md:hidden">
       Sort the list
     </button>
@@ -21,8 +21,8 @@
         <tr>
           <th class="w-12 p-3 text-sm font-semibold tracking-wide text-left">Id</th>
           <th class="w-74 p-3 flex text-sm font-semibold tracking-wide text-left"
-          (click)="sortTheList()">
-            <svg *ngIf="sorting; else sort" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+          (click)=" onClickSort()">
+            <svg *ngIf="isDescending; else sort" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
               stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
               <path stroke-linecap="round" stroke-linejoin="round"
                 d="M3 4.5h14.25M3 9h9.75M3 13.5h9.75m4.5-4.5v12m0 0l-3.75-3.75M17.25 21L21 17.25" />

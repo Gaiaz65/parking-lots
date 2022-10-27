@@ -29,7 +29,7 @@
         <dt class="text-sm font-medium text-gray-500">Status</dt>
         <dd class="mt-1 text-sm flex justify-between text-gray-900 sm:col-span-2 sm:mt-0">{{singleMeter.status}}
           <button class="bg-gray-500 hover:bg-gray-700 text-white py-1.5 px-1.5 rounded text-sm"
-            (click)="toggleStatus()">{{singleMeter.status
+            (click)="toggleStatus($event)">{{singleMeter.status
             ==='Disabled' ? 'Enable' : 'Disable'}}</button>
         </dd>
       </div>

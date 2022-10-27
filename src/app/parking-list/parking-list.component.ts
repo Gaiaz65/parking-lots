@@ -10,36 +10,36 @@ import { Meter } from '../models/data.model';
   templateUrl: './parking-list.component.html',
 })
 export class ParkingListComponent implements OnInit, OnDestroy {
-  metersSub$ = new Subscription
-  sorting:boolean | undefined = true
+  metersSub$ = new Subscription();
+  isDescending: boolean | undefined = true;
   creationMode = false;
   metersInfo: Meter[] = [];
 
   constructor(private dService: DataService) {}
 
   ngOnInit() {
-    this.metersSub$ = this.dService.initialInfoSub.subscribe(
-      (metersInfo) => {
-        this.metersInfo = metersInfo.sort((a, b) =>
-        a.address > b.address ? 1 : -1
-        );
+    this.metersSub$ = this.dService.initialInfoSub.subscribe({
+      next: (metersInfo) => {
+        this.metersInfo = this.sortByAddress(metersInfo);
       },
-      () => {
-        alert('Something went wrong, try again later!');
-      }
-      );
-    }
-    sortTheList(){
-      if(this.sorting) {
-        this.metersInfo.sort((a, b) => (a.address > b.address ? -1 : 1))
-        this.sorting = undefined
-      } else {
-        this.metersInfo.sort((a, b) => (a.address > b.address ? 1 : -1));
-        this.sorting = true;
-      }
+      error: (error) => alert('Something went wrong, try again later!'),
+    });
+  }
 
-    }
-    ngOnDestroy() {
-      this.metersSub$.unsubscribe()
+  onClickSort() {
+    this.metersInfo = this.sortByAddress(this.metersInfo);
+  }
+
+  sortByAddress(metersInfo: Meter[]): Meter[] {
+    if (this.isDescending) {
+      this.isDescending = !this.isDescending;
+      return metersInfo.sort((a, b) => (a.address > b.address ? -1 : 1));
+    } else {
+      this.isDescending = true;
+      return metersInfo.sort((a, b) => (a.address > b.address ? 1 : -1));
     }
   }
+  ngOnDestroy() {
+    this.metersSub$.unsubscribe();
+  }
+}

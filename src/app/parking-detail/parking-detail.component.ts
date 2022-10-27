@@ -18,7 +18,7 @@ export class ParkingDetailComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private dService: DataService,
+    private dService: DataService
   ) {}
 
   ngOnInit() {
@@ -39,7 +39,12 @@ export class ParkingDetailComponent implements OnInit {
     this.dService.changeItem(this.singleMeter);
   }
 
-  toggleStatus() {
+  toggleStatus(e?: MouseEvent) {
+    if (!!e) {
+      e.preventDefault();
+      e.stopPropagation();
+    }
+
     this.singleMeter.status === 'Enabled'
       ? (this.singleMeter.status = 'Disabled')
       : (this.singleMeter.status = 'Enabled');
